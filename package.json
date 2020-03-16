@@ -1,0 +1,24 @@
+{
+  "name": "led-matrix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "flocking.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node flocking.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/victor": "^1.1.0",
+    "easybotics-rpi-rgb-led-matrix": "^0.4.1",
+    "p5": "^1.0.0",
+    "victor": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/mathjs": "^6.0.4",
+    "@types/p5": "^0.9.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
+  }
+}
