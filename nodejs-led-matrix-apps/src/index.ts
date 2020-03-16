@@ -1,17 +1,19 @@
 import { World, Boid } from "~flocking/flocking";
+import {Creature, getOtherIndex} from "~predator-and-prey/predator-and-prey";
+
+const dpr = window.devicePixelRatio || 1;;
 const WIDTH = 64;
 const HEIGHT = 64;
 
 function startFlocking() {
-  const dpr = window.devicePixelRatio || 1;;
   const canvas = document.createElement("canvas");
-  canvas.width = WIDTH * dpr;
-  canvas.height = HEIGHT * dpr;
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
 
   document.body.appendChild(canvas);
   const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-  const world = new World(WIDTH * dpr, HEIGHT * dpr);
+  const world = new World(WIDTH, HEIGHT);
   const boids: Boid[] = [];
 
   for (let i = 0; i < 100; i++) {
@@ -33,4 +35,47 @@ function startFlocking() {
   }, 32);
 }
 
-startFlocking();
+function startPredatorAndPrey() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 640;
+  canvas.height = 640;
+
+  document.body.appendChild(canvas);
+  const context = canvas.getContext("2d") as CanvasRenderingContext2D;
+  const WIDTH = 32;
+  const cells = WIDTH * WIDTH;
+  const creatures: Creature[] = [];
+
+  for (let i = 0; i < cells; i++) {
+    let x = Math.floor(i % WIDTH);
+    let y = Math.floor(i / WIDTH);
+
+    creatures.push(new Creature(i, x, y));
+  }
+
+  function draw() {
+    console.log("draw -> creatures", creatures[0])
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    context.fillStyle = `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)})`;
+    context.fillRect(0, 0, 32, 32);
+
+    creatures.forEach(creature => {
+      if (!creature.isNothing()) {
+        const other = creatures[getOtherIndex(creature.index, WIDTH, WIDTH)];
+
+        creature.tick(other);
+  
+      }
+      
+      creature.draw_canvas(context, Math.floor(canvas.width / WIDTH));
+    });
+  }
+
+  setInterval(() => {
+    draw();
+  }, 100);
+}
+
+// startFlocking();
+startPredatorAndPrey();
