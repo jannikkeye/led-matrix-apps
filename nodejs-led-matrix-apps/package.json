@@ -1,0 +1,22 @@
+{
+  "name": "nodejs-led-matrix-apps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "demo": "parcel ./src/demo.html"
+  },
+  "author": "Jannik Keye",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^13.9.1",
+    "@types/victor": "^1.1.0",
+    "parcel": "^1.12.4",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "flocking": "^2.0.1",
+    "victor": "^1.1.0",
+    "easybotics-rpi-rgb-led-matrix": "0.4.1"
+  }
+}

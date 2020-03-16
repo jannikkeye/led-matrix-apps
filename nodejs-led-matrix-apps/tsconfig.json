@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "~*": ["./*"]
+    },
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": true,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es6",
+    "sourceMap": true,
+    "lib": ["es6", "DOM"],
+    "strict": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"]
+}
