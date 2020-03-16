@@ -1,9 +1,27 @@
-const REPRODUCTION_THRESHOLD = 5;
+const REPRODUCTION_THRESHOLD = 4;
 enum Kind {
     Nothing = 0,
     Predator = 1,
     Prey = 2
 }
+
+function createColor(min: number = 0, max: number = 255): [number, number, number] {
+    return [
+        Math.floor(Math.min(min, Math.random() * max)),
+        Math.floor(Math.min(Math.random() * max + min)),
+        Math.floor(Math.min(Math.random() * max)),
+    ];
+}
+
+let PREY_COLOR = createColor(100);
+let PREDATOR_COLOR = createColor(100);
+let NOTHING_COLOR: [number, number, number] = createColor(0, 50);
+
+setInterval(() => {
+    PREY_COLOR = createColor(100);
+    PREDATOR_COLOR = createColor(100);
+    NOTHING_COLOR = createColor(0, 50);
+}, 2000);
 
 export class Creature {
     kind: Kind;
@@ -18,15 +36,15 @@ export class Creature {
         if (kind === 0) {
             this.kind = Kind.Nothing;
             this.health = 0;
-            this.color = [0, 0, 0];
+            this.color = NOTHING_COLOR
         } else if (kind === 1) {
             this.kind = Kind.Predator;
             this.health = 5;
-            this.color = [255, 0, 0];
+            this.color = PREDATOR_COLOR;
         } else {
             this.kind = Kind.Prey;
             this.health = 1;
-            this.color = [0, 255, 0];
+            this.color = PREY_COLOR;
         }
     }
 
@@ -44,17 +62,17 @@ export class Creature {
 
     toNothing() {
         this.kind = Kind.Nothing;
-        this.color = [0, 0, 0];
+        this.color = NOTHING_COLOR;
     }
     toPrey() {
         this.kind = Kind.Prey;
         this.health = 1;
-        this.color = [0, 255, 0];
+        this.color = PREY_COLOR;
     }
     toPredator() {
         this.kind = Kind.Predator;
         this.health = 5;
-        this.color = [255, 0, 0];
+        this.color = PREDATOR_COLOR;
     }
 
     heal() {
@@ -112,7 +130,10 @@ export class Creature {
             return;
         }
 
-        this.tryMove(other);
+        if (Math.random() > 0.75) {
+            this.tryMove(other);
+        }
+
     }
 
     draw_canvas(context: CanvasRenderingContext2D, width: number) {

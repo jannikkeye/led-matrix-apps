@@ -7,7 +7,7 @@ var matrix = new LedMatrix(32, 64, 1, 2, 50, "adafruit-hat", "RGB", [
     "--led-slowdown-gpio=4",
 ]);
 
-const WIDTH = 32;
+const WIDTH = 64;
 const cells = WIDTH * WIDTH;
 const creatures: Creature[] = [];
 
@@ -18,8 +18,8 @@ for (let i = 0; i < cells; i++) {
     creatures.push(new Creature(i, x, y));
 }
 
-function run() {
-    const size = 64 / 32;
+function update() {
+    const size = 64 / 64;
     creatures.forEach(creature => {
         if (!creature.isNothing()) {
             const other = creatures[getOtherIndex(creature.index, WIDTH, WIDTH)];
@@ -27,31 +27,29 @@ function run() {
             creature.tick(other);
 
         }
-        const x = creature.x * size;
-        const y = creature.y * size;
 
-        matrix.fillPixel(
+        matrix.setPixel(
             creature.x * size,
             creature.y * size,
             creature.color[0],
             creature.color[1],
             creature.color[2],
         );
-        matrix.fillPixel(
+        matrix.setPixel(
             creature.x * size + 1,
             creature.y * size,
             creature.color[0],
             creature.color[1],
             creature.color[2],
         );
-        matrix.fillPixel(
+        matrix.setPixel(
             creature.x * size + 1,
             creature.y * size + 1,
             creature.color[0],
             creature.color[1],
             creature.color[2],
         );
-        matrix.fillPixel(
+        matrix.setPixel(
             creature.x * size,
             creature.y * size + 1,
             creature.color[0],
@@ -59,8 +57,11 @@ function run() {
             creature.color[2],
         );
     });
+
+    matrix.update();
 }
 
 setInterval(() => {
-    run()
-}, 100);
+    matrix.clear();
+    update()
+}, 1000 / 60);

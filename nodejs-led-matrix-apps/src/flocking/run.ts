@@ -1,16 +1,16 @@
 import LedMatrix from "easybotics-rpi-rgb-led-matrix";
 import { World, Boid } from "./flocking";
 
-var matrix = new LedMatrix(32, 64, 1, 2, 50, "adafruit-hat", "RGB", [
+var matrix = new LedMatrix(32, 64, 1, 2, 75, "adafruit-hat", "RGB", [
+    "--led-slowdown-gpio=4",
     "--led-show-refresh",
     "--led-pixel-mapper=U-mapper;Rotate:270",
-    "--led-slowdown-gpio=4",
 ]);
 
 const world = new World(64, 64);
 const boids: Boid[] = [];
 
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 128; i++) {
     boids.push(new Boid(i, world));
 }
 
@@ -24,13 +24,12 @@ function update() {
 
 function draw() {
     boids.forEach(b => {
-        matrix.drawCircle(
+        matrix.setPixel(
             Math.floor(b.position.x),
             Math.floor(b.position.y),
-            5,
-            b.r,
-            b.g,
-            b.b,
+            b.color[0],
+            b.color[1],
+            b.color[2],
         );
     });
     matrix.update();
@@ -41,7 +40,7 @@ function run() {
         matrix.clear();
         update();
         draw();
-    }, 200);
+    }, Math.round(1000 / 60));
 }
 
 run();

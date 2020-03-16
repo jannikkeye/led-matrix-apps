@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "demo": "parcel ./src/demo.html"
+    "demo": "parcel ./src/demo.html",
+    "dev:matrix:pnp": "sudo node_modules/ts-node-dev/bin/ts-node-dev --respawn ./src/predator-and-prey/run.ts",
+    "dev:matrix:flocking": "sudo node_modules/ts-node-dev/bin/ts-node-dev --respawn ./src/flocking/run.ts"
   },
   "author": "Jannik Keye",
   "license": "ISC",
@@ -12,6 +14,8 @@
     "@types/node": "^13.9.1",
     "@types/victor": "^1.1.0",
     "parcel": "^1.12.4",
+    "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   },
   "dependencies": {

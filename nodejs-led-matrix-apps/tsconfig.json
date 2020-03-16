@@ -5,8 +5,8 @@
       "~*": ["./*"]
     },
     "module": "commonjs",
-    "declaration": true,
-    "noImplicitAny": true,
+    "declaration": false,
+    "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
     "emitDecoratorMetadata": true,
@@ -16,7 +16,12 @@
     "lib": ["es6", "DOM"],
     "strict": true,
     "alwaysStrict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "typeRoots": [
+      "node_modules/@types",
+      "src/@types"
+    ]
   },
   "include": ["src/**/*"]
 }

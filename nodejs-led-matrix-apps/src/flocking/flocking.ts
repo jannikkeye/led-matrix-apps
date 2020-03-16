@@ -19,28 +19,41 @@ function limit(v: Victor, max: number): Victor {
   return v;
 }
 
+function createColor(min: number = 0, max: number = 255): [number, number, number] {
+  return [
+      Math.floor(Math.min(min, Math.random() * max)),
+      Math.floor(Math.min(Math.random() * max + min)),
+      Math.floor(Math.min(Math.random() * max)),
+  ];
+}
+
 export class Boid {
   position: Victor;
   velocity: Victor;
   acceleration: Victor;
   maxForce: number;
   maxSpeed: number;
-  r: number;
-  g: number;
-  b: number;
+  color: [number, number, number];
 
   constructor(public id: number, public world: World) {
     this.position = new Victor(
       Math.random() * world.width,
       Math.random() * world.height
     );
-    this.velocity = new Victor(Math.random() * 2 + 2, Math.random() * 2 + 2);
+    this.velocity = new Victor(Math.random(), Math.random());
     this.acceleration = new Victor(0, 0);
     this.maxForce = 1;
-    this.maxSpeed = 4;
-    this.r = Math.floor(Math.random() * 255);
-    this.g = Math.floor(Math.random() * 255);
-    this.b = Math.floor(Math.random() * 255);
+    this.maxSpeed = 2;
+    this.color = createColor(0, 200);
+
+
+    this.colorChange();
+  }
+
+  colorChange() {
+    setInterval(() => {
+      this.color = createColor(200, 255);
+    }, Math.floor(Math.random() * 1000 + 1000));
   }
 
   edges() {
@@ -62,7 +75,7 @@ export class Boid {
   }
 
   align(boids: Boid[]) {
-    const perceptionRadius = 25;
+    const perceptionRadius = 32;
     let steering = new Victor(0, 0);
     let total = 0;
 
@@ -87,7 +100,7 @@ export class Boid {
   }
 
   separation(boids: Boid[]) {
-    const perceptionRadius = 25;
+    const perceptionRadius = 32;
     let steering = new Victor(0, 0);
     let total = 0;
 
@@ -114,7 +127,7 @@ export class Boid {
   }
 
   cohesion(boids: Boid[]) {
-    const perceptionRadius = 25;
+    const perceptionRadius = 16;
     let steering = new Victor(0, 0);
     let total = 0;
 
@@ -157,9 +170,9 @@ export class Boid {
   }
 
   draw_canvas(ctx: CanvasRenderingContext2D) {
-    ctx.fillStyle = `rgb(${Math.floor(this.r)}, ${Math.floor(
-      this.g
-    )}, ${Math.floor(this.b)})`;
+    ctx.fillStyle = `rgb(${Math.floor(this.color[0])}, ${Math.floor(
+      this.color[1]
+    )}, ${Math.floor(this.color[2])})`;
     // ctx.arc(
     //   Math.floor(this.position.x),
     //   Math.floor(this.position.y),
