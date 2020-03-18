@@ -20,7 +20,9 @@
   },
   "dependencies": {
     "flocking": "^2.0.1",
-    "victor": "^1.1.0",
+    "victor": "^1.1.0"
+  },
+  "optionalDependencies": {
     "easybotics-rpi-rgb-led-matrix": "0.4.1"
   }
 }

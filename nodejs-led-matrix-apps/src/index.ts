@@ -2,8 +2,8 @@ import { World, Boid } from "~flocking/flocking";
 import {Creature, getOtherIndex} from "~predator-and-prey/predator-and-prey";
 
 const dpr = window.devicePixelRatio || 1;;
-const WIDTH = 64;
-const HEIGHT = 64;
+const WIDTH = 320;
+const HEIGHT = 320;
 
 function startFlocking() {
   const canvas = document.createElement("canvas");
@@ -37,8 +37,8 @@ function startFlocking() {
 
 function startPredatorAndPrey() {
   const canvas = document.createElement("canvas");
-  canvas.width = 640;
-  canvas.height = 640;
+  canvas.width = 320;
+  canvas.height = 320;
 
   document.body.appendChild(canvas);
   const context = canvas.getContext("2d") as CanvasRenderingContext2D;
@@ -77,5 +77,5 @@ function startPredatorAndPrey() {
   }, 100);
 }
 
-// startFlocking();
+startFlocking();
 startPredatorAndPrey();
