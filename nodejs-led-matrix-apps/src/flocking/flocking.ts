@@ -173,18 +173,11 @@ export class Boid {
     ctx.fillStyle = `rgb(${Math.floor(this.color[0])}, ${Math.floor(
       this.color[1]
     )}, ${Math.floor(this.color[2])})`;
-    // ctx.arc(
-    //   Math.floor(this.position.x),
-    //   Math.floor(this.position.y),
-    //   2,
-    //   0,
-    //   360
-    // );
     ctx.fillRect(
       Math.floor(this.position.x),
       Math.floor(this.position.y),
-      2,
-      2
+      4,
+      4
     );
   }
 }
