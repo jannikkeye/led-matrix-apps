@@ -6,7 +6,8 @@
   "scripts": {
     "demo": "parcel ./src/demo.html",
     "dev:matrix:pnp": "sudo node_modules/ts-node-dev/bin/ts-node-dev --respawn ./src/predator-and-prey/run.ts",
-    "dev:matrix:flocking": "sudo node_modules/ts-node-dev/bin/ts-node-dev --respawn ./src/flocking/run.ts"
+    "dev:matrix:flocking": "sudo node_modules/ts-node-dev/bin/ts-node-dev --respawn ./src/flocking/run.ts",
+    "dev:matrix:test": "sudo node_modules/ts-node-dev/bin/ts-node-dev --respawn ./src/test/run.ts"
   },
   "author": "Jannik Keye",
   "license": "ISC",

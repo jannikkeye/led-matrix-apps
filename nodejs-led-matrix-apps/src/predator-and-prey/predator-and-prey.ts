@@ -15,12 +15,12 @@ function createColor(min: number = 0, max: number = 255): [number, number, numbe
 
 let PREY_COLOR = createColor(100);
 let PREDATOR_COLOR = createColor(100);
-let NOTHING_COLOR: [number, number, number] = createColor(0, 50);
+let NOTHING_COLOR: [number, number, number] = createColor(0, 0);
 
 setInterval(() => {
     PREY_COLOR = createColor(100);
     PREDATOR_COLOR = createColor(100);
-    NOTHING_COLOR = createColor(0, 50);
+    NOTHING_COLOR = createColor(0, 0);
 }, 2000);
 
 export class Creature {
@@ -86,41 +86,41 @@ export class Creature {
     tryMove(other: Creature) {
         if (this.isPredator()) {
             this.bleed();
-            
+
             if (this.health <= 0) {
                 this.toNothing();
-                
+
                 return;
             }
-            
+
             if (other.isPrey()) {
                 this.health += other.health;
-                
+
                 if (this.health > this.reproductionThreshold) {
                     this.health = 5;
                 }
-                
+
                 other.toPredator();
-                
+
                 return;
             }
         }
-        
+
         if (this.isPrey()) {
             this.heal();
-            
+
             if (this.health >= this.reproductionThreshold && other.isNothing()) {
                 this.health = 1;
                 other.toPrey();
-                
+
                 return;
             }
         }
-        
+
         if (other.isNothing()) {
             other.kind = this.kind;
             other.health = this.health;
-            
+
             this.toNothing();
         }
     }

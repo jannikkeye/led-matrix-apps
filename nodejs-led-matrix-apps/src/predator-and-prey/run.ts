@@ -1,7 +1,7 @@
 import LedMatrix from "easybotics-rpi-rgb-led-matrix";
 import { Creature, getOtherIndex } from "./predator-and-prey";
 
-var matrix = new LedMatrix(32, 64, 1, 2, 50, "adafruit-hat", "RGB", [
+var matrix = new LedMatrix(32, 64, 1, 2, 100, "adafruit-hat", "RGB", [
     "--led-show-refresh",
     "--led-pixel-mapper=U-mapper;Rotate:270",
     "--led-slowdown-gpio=4",
@@ -19,7 +19,7 @@ for (let i = 0; i < cells; i++) {
 }
 
 function update() {
-    const size = 64 / 64;
+    const size = 64 / 32;
     creatures.forEach(creature => {
         if (!creature.isNothing()) {
             const other = creatures[getOtherIndex(creature.index, WIDTH, WIDTH)];
