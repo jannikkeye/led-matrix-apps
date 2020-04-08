@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "path": "rust"
+    },
+    {
+      "path": "nodejs-led-matrix-apps"
+    }
+  ],
+  "settings": {}
+}
